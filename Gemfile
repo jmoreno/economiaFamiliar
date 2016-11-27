@@ -54,3 +54,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Rails Admin FTW!!!
 gem 'rails_admin', '~> 1.0'
+
+# Authentication with Devise...
+gem 'devise'
+
+# Authorization with CanCanCan (Cause we can dance can can!!!)
+gem 'cancancan', '~> 1.10'
