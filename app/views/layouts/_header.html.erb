@@ -1,6 +1,16 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">
-	<%= fa_icon "money" %>
-    Economía Familiar
-  </a>
+  	<a class="navbar-brand" href="#">
+		<%= fa_icon "money" %>
+	    Economía Familiar
+	</a>
+  	<div id="navbar">
+  		<nav class="nav navbar-nav float-xs-right">
+  			<% if user_signed_in? %>
+  			<a class="nav-item nav-link" href="#">Load</a>
+	  			<% if current_user.admin? %>
+	  			<%= link_to 'Admin', rails_admin.dashboard_path, :class => "nav-item nav-link" %>
+  				<% end %>
+  			<% end %>
+  		</nav>
+  	</div>	
 </nav>
