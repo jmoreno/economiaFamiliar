@@ -5,12 +5,21 @@
 	</a>
   	<div id="navbar">
   		<nav class="nav navbar-nav float-xs-right">
-  			<% if user_signed_in? %>
+  		<% if user_signed_in? %>
   			<a class="nav-item nav-link" href="#">Load</a>
-	  			<% if current_user.admin? %>
-	  			<%= link_to 'Admin', rails_admin.dashboard_path, :class => "nav-item nav-link" %>
-  				<% end %>
+	  		<% if current_user.admin? %>
+	  		<%= link_to 'Admin', rails_admin.dashboard_path, :class => "nav-item nav-link" %>
   			<% end %>
+		    <li class="nav-item dropdown">
+		      <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		        Ajustes
+		      </a>
+		      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<%= link_to('Modificar usuario', edit_user_registration_path, :class => "dropdown-item") %>			
+						<%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "dropdown-item") %>        
+		      </div>
+		    </li>
+  		<% end %>
   		</nav>
   	</div>	
 </nav>

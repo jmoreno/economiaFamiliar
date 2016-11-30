@@ -1,9 +1,15 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form-signin'}) do |f| %>
-  <h2 class="form-signin-heading">Please sign in</h2>
-  <%= f.label :email, for: 'inputEmail', :class => 'sr-only' %>
-  <%= f.email_field :email, id: 'inputEmail', :class => 'form-control', placeholder: 'Email address', required: true, autofocus: true %>
-  <%= f.label :password, class: 'sr-only' %>
-  <%= f.password_field :password, id: 'inputPassword', :class => 'form-control', placeholder: 'Password', required: true, autocomplete: "off" %>
+	<h2 class="form-signin-heading">Log in</h2>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, :class => 'form-control', placeholder: 'Email address', autofocus: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, :class => 'form-control', placeholder: 'Password', autocomplete: "off" %>
+  </div>
 
   <% if devise_mapping.rememberable? -%>
     <div class="checkbox">
@@ -13,7 +19,7 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Sign in", class: "btn btn-lg btn-primary btn-block" %>
+    <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-block" %>
   </div>
   
   <%= render "devise/shared/links" %>
