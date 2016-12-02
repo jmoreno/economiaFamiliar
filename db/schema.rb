@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129074826) do
+ActiveRecord::Schema.define(version: 20161202214626) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(version: 20161129074826) do
     t.decimal  "balance"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "card"
+    t.string   "concept"
+    t.decimal  "commission"
+    t.string   "reference"
+    t.string   "command"
     t.index ["account_id"], name: "index_activities_on_account_id"
     t.index ["category_id"], name: "index_activities_on_category_id"
     t.index ["origin_id"], name: "index_activities_on_origin_id"
