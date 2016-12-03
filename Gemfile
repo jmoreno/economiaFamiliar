@@ -62,3 +62,5 @@ gem 'cancancan', '~> 1.10'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 # Font Awesome
 gem "font-awesome-rails"
+# RubyXL. Import-Export xlsx...
+gem 'rubyXL'
