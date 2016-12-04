@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203144430) do
+ActiveRecord::Schema.define(version: 20161203162554) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_accounts_on_name"
   end
 
   create_table "activities", force: :cascade do |t|
@@ -43,12 +44,14 @@ ActiveRecord::Schema.define(version: 20161203144430) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name"
   end
 
   create_table "origins", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_origins_on_name"
   end
 
   create_table "users", force: :cascade do |t|
