@@ -9,16 +9,16 @@
 User.delete_all
 
 user = User.new
-user.email = 'jmoreno.zn@gmail.com'
+user.email = 'admin@economiafamiliar.com'
 user.password = 'piopioqueyonohesido'
 user.password_confirmation = 'piopioqueyonohesido'
 user.admin = true
 user.save!
 
 user = User.new
-user.email = 'amreyg@hotmail.com'
+user.email = 'user@economiafamiliar.com'
 user.password = 'vayalioelmontepio'
 user.password_confirmation = 'vayalioelmontepio'
-user.admin = true
+user.admin = false
 user.save!
 

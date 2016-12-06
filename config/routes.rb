@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'reports/index'
+  get 'reports/monthly'
+  get 'reports/yearly'
+
   get 'welcome/index'
 
   root 'welcome#index'
