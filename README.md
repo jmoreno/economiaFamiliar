@@ -38,17 +38,17 @@ Además de las dependencias que el framework trae consigo, en este proyecto he i
 
 * [PostgreSQL](https://bitbucket.org/ged/ruby-pg/wiki/Home). Ruby on Rails viene preconfigurado para funcionar con SQLite, una base de datos sorprendente por su poco tamaño y su excelente rendimiento, pero si al final decides desplegar en un sitio como [Heroku](https://www.heroku.com/) necesitarás una base de datos más *potente*. Porque yo normalmente suelo utilizar Heroku y porque es la madre de todas las bases de datos relacionales, en el entorno de *Producción* esta aplicación usa [PostgreSQL](https://www.postgresql.org/)
 
-* [RailsAdmin](https://github.com/sferik/rails_admin). 
+* [RailsAdmin](https://github.com/sferik/rails_admin). En ocasiones viene muy bien tener un panel de control de todas las entidades que forman la base de datos para realizar algunas operaciones de mantenimiento (consulta, edición, borrado, copia de seguriad, exportación).
 
-* [devise](https://github.com/plataformatec/devise).
+* [devise](https://github.com/plataformatec/devise). Se encarga de la autenticación y la gestión de usuarios. Aunque en este proyecto no lo uso de esta manera podría encargarse perfectamente del registro de nuevos usuarios con envío de mails de confirmación y de recuperación de contraseña.
 
-* [CanCanCan](https://github.com/CanCanCommunity/cancancan).
+* [CanCanCan](https://github.com/CanCanCommunity/cancancan). Si tenemos usuarios tendremos que definir que es lo que pueden hacer esos usuarios: unos podrán acceder al panel de administración, otros podrán solamente consultar los informes... esta gema se encarga de controlar que puede hacer cada usuario
 
-* [Bootstrap 4.0](https://github.com/twbs/bootstrap-rubygem).
+* [Bootstrap 4.0](https://github.com/twbs/bootstrap-rubygem). Si eres un pésimo diseñador Bootstrap hará que tus aplicaciones sean un poco más aparentes.
 
-* [Font Awesome](https://github.com/bokmann/font-awesome-rails).
+* [Font Awesome](https://github.com/bokmann/font-awesome-rails). A ver como si no iba a poder sacar el billetito ese junto al nombre de la aplicación.
 
-* [rubyXL](https://github.com/weshatheleopard/rubyXL).
+* [rubyXL](https://github.com/weshatheleopard/rubyXL). Para poder leer y escribir los ficheros xlsx.
 
-* [Pivot Table](https://github.com/edjames/pivot_table).
+* [Pivot Table](https://github.com/edjames/pivot_table). Hacer un group by es fácil y mola... pero pintarlo es harina de otro costal. Esta gema ha sido todo un descubrimiento.
 
