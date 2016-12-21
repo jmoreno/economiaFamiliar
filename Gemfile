@@ -62,7 +62,11 @@ gem 'cancancan', '~> 1.10'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 # Font Awesome
 gem "font-awesome-rails"
-# RubyXL. Import-Export xlsx...
+# Working with spreedsheets: xls, xlsx...
 gem 'rubyXL'
+gem 'roo', '~> 2.5.0'
+gem 'roo-xls'
 # PivotTables...
-gem "pivot_table"
+gem 'pivot_table'
+# HTML parser
+gem 'nokogiri'

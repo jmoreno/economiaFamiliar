@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  regex: MyString
+  category_name: MyString
+  origin: 1
+  card: 1
+  reference: 1
+  concept: 1
+  command: 1
+
+two:
+  regex: MyString
+  category_name: MyString
+  origin: 1
+  card: 1
+  reference: 1
+  concept: 1
+  command: 1

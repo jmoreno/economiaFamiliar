@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+
+  get 'management/index'
+  post 'management/import'
+  post 'management/backup'
+  post 'management/restore'
+
   get 'reports/index'
   get 'reports/monthly'
   get 'reports/yearly'
+  get 'reports/originsByCategory'
 
   get 'welcome/index'
 

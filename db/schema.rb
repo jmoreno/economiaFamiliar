@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203162554) do
+ActiveRecord::Schema.define(version: 20161217141142) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20161203162554) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_categories_on_name"
+  end
+
+  create_table "category_regexes", force: :cascade do |t|
+    t.string   "regex"
+    t.string   "category_name"
+    t.integer  "origin"
+    t.integer  "card"
+    t.integer  "reference"
+    t.integer  "concept"
+    t.integer  "command"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "origins", force: :cascade do |t|
