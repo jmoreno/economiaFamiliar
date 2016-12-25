@@ -19,63 +19,63 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  brand: Family economy
+es:
+  brand: Economía familiar
   layouts:
-    _header:
-      brand: Family economy
-      reports: Reports
-      categories: Simple
-      categories_by_years: Categories by years
-      categories_by_months: Categories by months
-      origins_by_categories: Origins by categories
-      next_reports: Advance
-      next_one: Custom report
-      next_two: Custom report 2
-      data_management: Data management
-      admin_panel: Admin Panel
-      settings: Settings
-      user_edit: User edit
-      logout: Logout
+    header:
+      brand: Economía familiar
+      reports: Informes
+      categories: Sencillos
+      categories_by_years: Categorías por años
+      categories_by_months: Categorías por meses
+      origins_by_categories: Ordenantes por categorias
+      next_reports: Avanzados
+      next_one: Informe avanzado 1
+      next_two: Informe avanzado 2
+      data_management: Gestión de datos
+      admin_panel: Panel de administración
+      settings: Ajustes
+      user_edit: Editar usuario
+      logout: Desconectar
   management:
     index:
-      import_title: Import file
+      import_title: Importar fichero
       import_paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      import_title_browse_button: Browse
-      import_browse_placeholder: Choose file...
+      import_title_browse_button: Explorar
+      import_browse_placeholder: Seleccione un fichero...
       import_small_paragraph: This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.
-      import_title_action_button: Import file
-      backup_title: Create backup
+      import_title_action_button: Importar
+      backup_title: Crear copia de seguridad
       backup_paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      backup_title_action_button: Create and download
-      restore_title: Restore backup
+      backup_title_action_button: Descargar
+      restore_title: Restaurar copia de seguridad
       restore_paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      restore_title_browse_button: Browse
-      restore_browse_placeholder: Choose file...
-      restore_title_action_button: Restore backup
+      restore_title_browse_button: Explorar
+      restore_browse_placeholder: Seleccione un fichero...
+      restore_title_action_button: Restaurar
     import:
-      successfull_import: Data imported!
-      unsuccessfull_import: Wrong file!
+      successfull_import: Datos cargados!
+      unsuccessfull_import: Fichero incorrecto!
     backup:
-      successfull_backup: Backup created!
+      successfull_backup: La copia de seguridad ha sido creada!
     restore:
-      successfull_restoring: Backup restored!
+      successfull_restoring: La copia de seguridad ha sido restaurada!
   reports:
     index:
-      title: Reports
+      title: Informes
     monthly:
-      title: Categories by months
-      year_select_label: Year of study
-      title_submit_button: Update
+      title: Categorías por meses
+      year_select_label: Año de estudio
+      title_submit_button: Actualizar
     yearly:
-      title: Categories by years
-      categories_select_label: Categories
-      year_select_label: Year of study
-      title_submit_button: Update
+      title: Categorías por años
+      categories_select_label: Categorías
+      year_select_label: Año de estudio
+      title_submit_button: Actualizar
     originsByCategory:
-      title: Origins by categories
+      title: Ordenantes por categorías
   welcome:
     index:
-      title: Welcome to Family Economy
-      paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      button_title: 'Let´s go!'
+      title: Bienvenido a Economía familiar
+      paragraph: En esta web encontraras todos los movimientos realizados en tus cuentas, podrás consultar el gasto por determinados conceptos e incluso podrás saber que gastos faltan por llegar...
+      button_title: Adelante

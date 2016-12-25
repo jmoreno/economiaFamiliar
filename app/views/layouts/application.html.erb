@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Economia Familiar</title>
+    <title><%= t 'brand' %></title>
     <!-- Required meta tags always come first -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,9 +15,14 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
-        <% flash.each do |name, msg| %>
-            <%= content_tag(:div, msg, class: "alert alert-info") %>
-        <% end %>
+				<% flash.each do |name, msg| %>
+				  <% if msg.is_a?(String) %>
+				    <div class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>" role="alert">
+				      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+				    </div>
+				  <% end %>
+				<% end %>
         <%= yield %>
     </div>
   </body>

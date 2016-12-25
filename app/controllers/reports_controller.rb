@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 
   def index
-  	@title = "Informes"
+  	@title = t('.title')
   end
 
   def monthly
@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
   		@yearSelected = @years.first
   	end
   	
-  	@title = "Análisis mensual por categorías"
+  	@title = t('.title')
 
   	totalsByCategory = 
   	Category
@@ -39,7 +39,7 @@ class ReportsController < ApplicationController
 
   def yearly
 
-  	@title = "Análisis anual por categorías"
+  	@title = t('.title')
 
   	totalsByCategory = 
   	Category
@@ -79,9 +79,7 @@ class ReportsController < ApplicationController
   		@yearSelected = @years.first
   	end
   	
-
-  	
-  	@title = "Ordenantes por categorías"
+  	@title = t('.title')
 
   	origins = 
   	Origin

@@ -6,24 +6,24 @@ class ManagementController < ApplicationController
   	case params[:file_type]
   	when '1'
   		Activity.import_template(params[:file])
-  		flash_message = "Data imported!"
+  		flash[:notice] = t('.successfull_import')
   	when '2'
   		Activity.import_santander(params[:file])
-  		flash_message = "Data imported!"
+  		flash[:notice] = t('.successfull_import')
   	when '3'
   		Activity.import_bankinter(params[:file])
-  		flash_message = "Data imported!"
+  		flash[:notice] = t('.successfull_import')
   	else
-  		flash_message = "Invalid file!"  		
+  		flash[:alert] = t('.unsuccessfull_import')
   	end
   	redirect_to management_index_path, notice: flash_message
   end
 
   def backup
-  	redirect_to management_index_path, notice: "Backup created!"
+  	redirect_to management_index_path, notice: t('.successfull_backup')
   end
 
   def restore
-  	redirect_to management_index_path, notice: "Backup restored!"
+  	redirect_to management_index_path, notice: t('.successfull_restoring')
   end
 end
