@@ -3,7 +3,7 @@
   	<h1><%= t '.import_title' %></h1>	
   </div>
 	<div class="row">
-		<p><%= t '.import_paragraph' %></p>
+		<p><%= raw t '.import_paragraph' %><%= link_to(t('.template_link_title'), management_template_path) %>.</p>
 		<%= form_tag management_import_path, multipart: true do %>
 			<div class="form-group row">
 				<div class="col-lg-3">

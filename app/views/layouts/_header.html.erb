@@ -9,9 +9,9 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t '.reports' %></a>
 			  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				  <h6 class="dropdown-header"><%= t '.categories' %></h6>
-					<%= link_to(t('categories_by_years'), reports_yearly_path, :class => "dropdown-item") %>			
-					<%= link_to(t('categories_by_months'), reports_monthly_path, :class => "dropdown-item") %>        
-					<%= link_to(t('origins_by_categories'), reports_originsByCategory_path, :class => "dropdown-item") %>        
+					<%= link_to(t('.categories_by_years'), reports_yearly_path, :class => "dropdown-item") %>			
+					<%= link_to(t('.categories_by_months'), reports_monthly_path, :class => "dropdown-item") %>        
+					<%= link_to(t('.origins_by_categories'), reports_originsByCategory_path, :class => "dropdown-item") %>        
 				  <div class="dropdown-divider"></div>
 				  <h6 class="dropdown-header"><%= t '.next_reports' %></h6>
 					<%= link_to(t('.next_one'), reports_yearly_path, :class => "dropdown-item disabled") %>			

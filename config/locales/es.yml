@@ -35,12 +35,13 @@ es:
       data_management: Gestión de datos
       admin_panel: Panel de administración
       settings: Ajustes
-      user_edit: Editar usuario
+      edit_user: Editar usuario
       logout: Desconectar
   management:
     index:
       import_title: Importar fichero
-      import_paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      import_paragraph: "Si dispone de ficheros de movimientos descargados del área de clientes del Santander o Bankinter puede importar sus datos a la aplicación. Si lo prefiere también puede cargarlos usando nuestra plantilla, la cual puede descargarse desde "
+      template_link_title: aquí
       import_title_browse_button: Explorar
       import_browse_placeholder: Seleccione un fichero...
       import_small_paragraph: This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.

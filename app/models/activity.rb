@@ -70,17 +70,17 @@ class Activity < ApplicationRecord
   	workbook = RubyXL::Parser.parse(file.path)
   	worksheet = workbook[0]
   	
-  	if ( worksheet[0][0] == 'Fecha Operación' &&	
-  			 worksheet[0][1] == 'Fecha Valor' &&	
-  			 worksheet[0][2] == 'Concepto' &&	
-  			 worksheet[0][3] == 'Importe' &&	
-  			 worksheet[0][4] == 'Saldo' )
+  	if ( worksheet[0][0] == 'Operation Date' &&	
+  			 worksheet[0][1] == 'Value Date' &&	
+  			 worksheet[0][2] == 'Description' &&	
+  			 worksheet[0][3] == 'Amount' &&	
+  			 worksheet[0][4] == 'Balance' )
   			 
 			arrayRegex = CategoryRegex.all
 
-	  	if ( worksheet[3][1] == 'Número de Cuenta: ')
-	  		account = Account.find_or_create_by(name: worksheet[4][4])
-	  	end
+# 	  	if ( worksheet[3][1] == 'Número de Cuenta: ')
+# 	  		account = Account.find_or_create_by(name: worksheet[4][4])
+# 	  	end
 	  		
 	  	worksheet.drop(1).each { |row|
 	  	

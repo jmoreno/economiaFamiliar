@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 	scope "(:locale)", locale: /en|es/ do
 	  get 'management/index'
+	  get 'management/template'
 	  post 'management/import'
 	  post 'management/backup'
 	  post 'management/restore'
