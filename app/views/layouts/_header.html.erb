@@ -18,7 +18,7 @@
 					<%= link_to(t('.next_two'), reports_monthly_path, :class => "dropdown-item disabled") %>        
 			  </div>
 			</li>
-		  <% if current_user.admin? %>
+		  <% if user_signed_in? && current_user.admin? %>
 		  <%= link_to t('.data_management'), management_index_path, :class => "nav-item nav-link" %>
 		  <%= link_to t('.admin_panel'), rails_admin.dashboard_path, :class => "nav-item nav-link" %>
 	  	<% end %>
