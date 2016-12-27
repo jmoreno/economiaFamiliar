@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  unless (ENV["DEMO"] = true)
+  unless (ENV["DEMO"] == true)
 	  before_action :authenticate_user! 
 	end
   before_action :set_locale
