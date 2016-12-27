@@ -3,7 +3,7 @@
 	<button type="button" class="navbar-toggler hidden-lg-up float-xs-right" data-toggle="collapse" data-target="#navbarResponsive" aria-expanded="false" aria-controls="navbarResponsive" aria-label="Toggle navigation"></button>
   <div class="collapse navbar-toggleable-md" id="navbarResponsive">
   	<nav class="nav navbar-nav">
-  	<% if user_signed_in? %>
+  	<% if user_signed_in? || ENV["DEMO"] == 'true' %>
   	<ul class="nav navbar-nav float-xs-left">
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t '.reports' %></a>
