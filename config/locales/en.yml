@@ -267,8 +267,9 @@ en:
       restore_browse_placeholder: Choose file...
       restore_title_action_button: Restore backup
     import:
-      successfull_import: Data imported!
-      unsuccessfull_import: Wrong file!
+      successfull_import: Data imported successfully.
+      unsuccessfull_import: Wrong file. Data don´t imported.
+      file_not_present: You haven´t chosen any file.
     backup:
       successfull_backup: Backup created!
     restore:
