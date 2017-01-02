@@ -47,7 +47,14 @@ class ManagementController < ApplicationController
   end
   
   def backup
-  	redirect_to management_index_path, notice: t('.successfull_backup')
+  	@accounts = Account.all
+  	@categories = Category.all
+  	@regexes = CategoryRegex.all
+  	@origins = Origin.all
+  	@activities = Activity.includes(:account, :category, :origin).all
+#   	render formats: :xls
+  	render file: '/management/backup.xls.erb', content_type: 'application/xls'
+#   	redirect_to management_index_path, notice: t('.successfull_backup')
   end
 
   def restore

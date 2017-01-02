@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Accounts">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+      </Row>
+    <% @accounts.each do |account| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= account.name %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Categories">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+      </Row>
+    <% @categories.each do |category| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= category.name %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Regex for categories">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Regex</Data></Cell>
+        <Cell><Data ss:Type="String">Category</Data></Cell>
+        <Cell><Data ss:Type="String">Origin</Data></Cell>
+        <Cell><Data ss:Type="String">Card</Data></Cell>
+        <Cell><Data ss:Type="String">Reference</Data></Cell>
+        <Cell><Data ss:Type="String">Concept</Data></Cell>
+        <Cell><Data ss:Type="String">Command</Data></Cell>
+      </Row>
+    <% @regexes.each do |regex| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= regex.regex %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= regex.category_name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= regex.origin %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= regex.card %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= regex.reference %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= regex.concept %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= regex.command %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Origins">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+      </Row>
+    <% @origins.each do |origin| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= origin.name %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Activities">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Operation date</Data></Cell>
+        <Cell><Data ss:Type="String">Value date</Data></Cell>
+        <Cell><Data ss:Type="String">Amount</Data></Cell>
+        <Cell><Data ss:Type="String">Balance</Data></Cell>
+        <Cell><Data ss:Type="String">Account</Data></Cell>
+        <Cell><Data ss:Type="String">Category</Data></Cell>
+        <Cell><Data ss:Type="String">Origin</Data></Cell>
+        <Cell><Data ss:Type="String">Card</Data></Cell>
+        <Cell><Data ss:Type="String">Concept</Data></Cell>
+        <Cell><Data ss:Type="String">Commission</Data></Cell>
+        <Cell><Data ss:Type="String">Reference</Data></Cell>
+        <Cell><Data ss:Type="String">Command</Data></Cell>
+      </Row>
+    <% @activities.each do |activity| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= activity.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= activity.operationDate %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= activity.valueDate %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= activity.amount %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= activity.balance %></Data></Cell>
+        <% if defined?(activity.account.name) %>
+        <Cell><Data ss:Type="String"><%= activity.account.name %></Data></Cell>
+        <% else %>
+        <Cell><Data ss:Type="String">></Data></Cell>
+        <% end %>
+        <% if defined?(activity.category.name) %>
+        <Cell><Data ss:Type="String"><%= activity.category.name %></Data></Cell>
+        <% else %>
+        <Cell><Data ss:Type="String">></Data></Cell>
+        <% end %>
+        <% if defined?(activity.origin.name) %>
+        <Cell><Data ss:Type="String"><%= activity.origin.name %></Data></Cell>
+        <% else %>
+        <Cell><Data ss:Type="String">></Data></Cell>
+        <% end %>
+        <Cell><Data ss:Type="String"><%= activity.card %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= activity.concept %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= activity.commission %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= activity.reference %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= activity.command %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
