@@ -1,5 +1,3 @@
-require 'active_support/all'
-
 module FileManager
 
 	class File
@@ -8,9 +6,6 @@ module FileManager
 		attr_accessor :file, :file_type
 		
 		validates :file, presence: true
-#   	validates_format_of :file, with: %r{\.(xls[mx]?)\z}i, if: "file_type == '1'", message: I18n.t('.unsuccessfull_import')
-#   	validates_format_of :file, with: %r{\.(xls[mx]?)\z}i, if: "file_type == '2'", message: I18n.t('.unsuccessfull_import')
-#   	validates_format_of :file, with: %r{\.(txt)\z}i, if: "file_type == '3'", message: I18n.t('.unsuccessfull_import')
  
  		def initialize(attributes = {})
  			attributes.each do |name, value|
@@ -33,6 +28,12 @@ module FileManager
 			worksheet.add_cell(0, 2, 'Description') 
 			worksheet.add_cell(0, 3, 'Amount') 
 			worksheet.add_cell(0, 4, 'Balance')
+
+			5.times do |i|
+				worksheet.sheet_data[0][i].change_font_bold(true) 
+				worksheet.sheet_data[0][i].change_fill('007fff')
+				worksheet.sheet_data[0][i].change_font_color('ffffff')
+			end
 	
 			worksheet.add_cell(1, 0, DateTime.now.to_date) 
 			worksheet.add_cell(1, 1, DateTime.now.to_date) 
@@ -40,14 +41,6 @@ module FileManager
 			worksheet.add_cell(1, 3, 1234.56) 
 			worksheet.add_cell(1, 4, 1234567.89)
 	
-			5.times do |i|
-				worksheet.sheet_data[0][i].change_font_name('Calibri') 
-				worksheet.sheet_data[1][i].change_font_name('Calibri') 
-				worksheet.sheet_data[0][i].change_font_bold(true) 
-				worksheet.sheet_data[0][i].change_fill('007fff')
-				worksheet.sheet_data[0][i].change_font_color('ffffff')
-			end
-			
 			return workbook.stream
 			 
 		end
@@ -208,4 +201,100 @@ module FileManager
 	
 	end
 					
+	class Backup
+
+		def self.create
+	
+	   	workbook = RubyXL::Workbook.new 
+	   	
+			worksheet = workbook[0]
+			worksheet.sheet_name = "Accounts"
+			['Name'].each_with_index { |header, index|
+				worksheet.add_cell(0, index, header) 
+				worksheet.sheet_data[0][index].change_font_bold(true) 
+				worksheet.sheet_data[0][index].change_fill('007fff')
+				worksheet.sheet_data[0][index].change_font_color('ffffff')
+			}
+			accounts = Account.all.order(:name)
+			accounts.each_with_index { |account, index|
+				row = index + 1
+				[account.name].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+			}
+
+			worksheet = workbook.add_worksheet('Categories')
+			['Name'].each_with_index { |header, index|
+				worksheet.add_cell(0, index, header) 
+				worksheet.sheet_data[0][index].change_font_bold(true) 
+				worksheet.sheet_data[0][index].change_fill('007fff')
+				worksheet.sheet_data[0][index].change_font_color('ffffff')
+			}
+	  	categories = Category.all.order(:name)
+			categories.each_with_index { |category, index|
+				row = index + 1
+				[category.name].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+			}
+
+			worksheet = workbook.add_worksheet('Regex for Categories')
+			['Regex', 'Category', 'Origin', 'Card', 'Reference', 'Concept', 'Command'].each_with_index { |header, index|
+				worksheet.add_cell(0, index, header) 
+				worksheet.sheet_data[0][index].change_font_bold(true) 
+				worksheet.sheet_data[0][index].change_fill('007fff')
+				worksheet.sheet_data[0][index].change_font_color('ffffff')
+			}
+	  	regexes = CategoryRegex.all.order(:regex)
+			regexes.each_with_index do |regex, index|
+				row = index + 1
+				[regex.regex, regex.category_name, regex.origin, regex.card, regex.reference, regex.concept, regex.command].each_with_index { |field, column|
+					worksheet.add_cell(row, column, field)					
+				}
+			end
+
+			worksheet = workbook.add_worksheet('Origins')
+			['Name'].each_with_index { |header, index|
+				worksheet.add_cell(0, index, header) 
+				worksheet.sheet_data[0][index].change_font_bold(true) 
+				worksheet.sheet_data[0][index].change_fill('007fff')
+				worksheet.sheet_data[0][index].change_font_color('ffffff')
+			}
+	  	origins = Origin.select(:name).all.order(:name)
+			origins.each_with_index { |origin, index|
+				row = index + 1
+				[origin.name].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+			}
+
+			worksheet = workbook.add_worksheet('Activities')
+			['Name', 'Operation date', 'Value date', 'Amount', 'Balance', 'Account', 'Category', 'Origin', 'Card', 'Concept', 'Commission', 'Reference', 'Command'].each_with_index { |header, index|
+				worksheet.add_cell(0, index, header) 
+				worksheet.sheet_data[0][index].change_font_bold(true) 
+				worksheet.sheet_data[0][index].change_fill('007fff')
+				worksheet.sheet_data[0][index].change_font_color('ffffff')
+			}
+	  	activities = Activity.includes(:account, :category, :origin).all.order(:operationDate)
+			activities.each_with_index do |activity, index|
+				row = index + 1
+			  [activity.name, activity.operationDate, activity.valueDate, activity.amount, activity.balance, defined?(activity.account.name) ? activity.account.name : "", defined?(activity.category.name) ? activity.category.name : "", defined?(activity.origin.name) ? activity.origin.name : "", activity.card, activity.concept, activity.commission, activity.reference, activity.command].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+			end
+			
+			return workbook.stream
+			 
+		end
+		
+		def self.restore(file)
+			
+			begin
+
+		  	workbook = RubyXL::Parser.parse(file.path)
+
+			  worksheet = workbook[0]		  	
+		  rescue Exception => e
+		  	
+		    Rails.logger.error "file_manager::template.import => exception #{e.class.name} : #{e.message}"
+				{:error => true} 
+
+    	end
+	  				
+		end
+		
+	end
+	
 end

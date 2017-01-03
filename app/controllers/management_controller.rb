@@ -4,11 +4,8 @@ class ManagementController < ApplicationController
   end
 
   def template
-  	
   	template = FileManager::Template.new()
-		flash[:notice] = "Se debería haber descargado un ficherete"
 		send_data template.string, :type => "application/excel", :filename => 'EconomiaFamiliar_template.xlsx'
-		
  	end
 
   def import
@@ -47,14 +44,8 @@ class ManagementController < ApplicationController
   end
   
   def backup
-  	@accounts = Account.all
-  	@categories = Category.all
-  	@regexes = CategoryRegex.all
-  	@origins = Origin.all
-  	@activities = Activity.includes(:account, :category, :origin).all
-#   	render formats: :xls
-  	render file: '/management/backup.xls.erb', content_type: 'application/xls'
-#   	redirect_to management_index_path, notice: t('.successfull_backup')
+  	backup = FileManager::Backup.create()
+		send_data backup.string, :type => "application/excel", :filename => 'EconomiaFamiliar_backup.xlsx'
   end
 
   def restore
