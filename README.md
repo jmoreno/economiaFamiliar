@@ -8,7 +8,7 @@ La importación de movimientos se realiza a partir de los ficheros que pueden de
  
 ## ¿Como puedo usar esta aplicación?
 
-En primer lugar puedes echarle un vistazo a esta [demo]().
+En primer lugar puedes echarle un vistazo a esta [demo](http://economiafamiliar-demo.herokuapp.com).
 
 Pero si prefieres trastear con el proyecto lo mejor es clonar 😛😛😛:
 
