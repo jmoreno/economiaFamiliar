@@ -49,6 +49,21 @@ class ManagementController < ApplicationController
   end
 
   def restore
-  	redirect_to management_index_path, notice: t('.successfull_restoring')
+
+  	@file = FileManager::File.new({file: params[:file], file_type: params[:file_type]})
+
+  	if @file.valid?
+	  	import_status = FileManager::Backup.restore(params[:file])
+			if import_status[:error]
+				flash[:error] = t('.unsuccessfull_import')
+			else
+				flash[:notice] = t('.successfull_import')	
+			end
+  	else
+  		flash[:alert] = t('.file_not_present')	
+  	end
+
+  	redirect_to management_index_path
+
   end
 end

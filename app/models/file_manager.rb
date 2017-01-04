@@ -23,23 +23,17 @@ module FileManager
 			worksheet = workbook[0]
 			worksheet.sheet_name = "Template"
 			
-			worksheet.add_cell(0, 0, 'Operation Date') 
-			worksheet.add_cell(0, 1, 'Value Date') 
-			worksheet.add_cell(0, 2, 'Description') 
-			worksheet.add_cell(0, 3, 'Amount') 
-			worksheet.add_cell(0, 4, 'Balance')
-
-			5.times do |i|
-				worksheet.sheet_data[0][i].change_font_bold(true) 
-				worksheet.sheet_data[0][i].change_fill('007fff')
-				worksheet.sheet_data[0][i].change_font_color('ffffff')
-			end
-	
-			worksheet.add_cell(1, 0, DateTime.now.to_date) 
-			worksheet.add_cell(1, 1, DateTime.now.to_date) 
-			worksheet.add_cell(1, 2, 'Lorem ipsum dolor sit amet consectetur adipiscing elit') 
-			worksheet.add_cell(1, 3, 1234.56) 
-			worksheet.add_cell(1, 4, 1234567.89)
+			['Operation Date', 'Value Date', 'Description', 'Amount', 'Balance', 'Account'].each_with_index { |header, index|
+				worksheet.add_cell(0, index, header) 
+				worksheet.sheet_data[0][index].change_font_bold(true) 
+				worksheet.sheet_data[0][index].change_fill('007fff')
+				worksheet.sheet_data[0][index].change_font_color('ffffff')
+			}
+	  	array_of_samples = [[DateTime.now.to_date, DateTime.now.to_date, 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 1234.56, 1234567.89, 'The very best account in the world']]
+			array_of_samples.each_with_index { |sample, index|
+				row = index + 1
+				sample.each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+			}
 	
 			return workbook.stream
 			 
@@ -56,9 +50,11 @@ module FileManager
 						 worksheet[0][1] == 'Value Date' &&	
 						 worksheet[0][2] == 'Description' &&	
 						 worksheet[0][3] == 'Amount' &&	
-						 worksheet[0][4] == 'Balance' )
+						 worksheet[0][4] == 'Balance' &&	
+						 worksheet[0][5] == 'Account' )
 				  	
 					worksheet.drop(1).each { |row|
+						account = Account.find_or_create_by(name: row[5])
 					 	Activity.new_activity_from_file(account, row[0], row[1], row[2], row[3], row[4])
 					}
 					
@@ -188,7 +184,7 @@ module FileManager
 			
 				end
 
-				{:error => true} 
+				{:error => false} 
 
 		  rescue Exception => e
 		  	
@@ -263,16 +259,17 @@ module FileManager
 			}
 
 			worksheet = workbook.add_worksheet('Activities')
-			['Name', 'Operation date', 'Value date', 'Amount', 'Balance', 'Account', 'Category', 'Origin', 'Card', 'Concept', 'Commission', 'Reference', 'Command'].each_with_index { |header, index|
+			['Operation date', 'Value date', 'Name', 'Amount', 'Balance', 'Account', 'Category', 'Origin', 'Card', 'Concept', 'Commission', 'Reference', 'Command'].each_with_index { |header, index|
 				worksheet.add_cell(0, index, header) 
 				worksheet.sheet_data[0][index].change_font_bold(true) 
 				worksheet.sheet_data[0][index].change_fill('007fff')
 				worksheet.sheet_data[0][index].change_font_color('ffffff')
 			}
 	  	activities = Activity.includes(:account, :category, :origin).all.order(:operationDate)
+# 	  	activities = Activity.includes(:account, :category, :origin).limit(42).order(:operationDate)
 			activities.each_with_index do |activity, index|
 				row = index + 1
-			  [activity.name, activity.operationDate, activity.valueDate, activity.amount, activity.balance, defined?(activity.account.name) ? activity.account.name : "", defined?(activity.category.name) ? activity.category.name : "", defined?(activity.origin.name) ? activity.origin.name : "", activity.card, activity.concept, activity.commission, activity.reference, activity.command].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+			  [activity.operationDate, activity.valueDate, activity.name, activity.amount, activity.balance, defined?(activity.account.name) ? activity.account.name : "", defined?(activity.category.name) ? activity.category.name : "", defined?(activity.origin.name) ? activity.origin.name : "", activity.card, activity.concept, activity.commission, activity.reference, activity.command].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
 			end
 			
 			return workbook.stream
@@ -284,8 +281,96 @@ module FileManager
 			begin
 
 		  	workbook = RubyXL::Parser.parse(file.path)
+		  	
+		  	worksheet = workbook['Accounts']
+		  	headers = ['Name'] 	 	
+		  	are_these_arrays_equals = true
+				headers.each_with_index do |header, column| 
+					if header != worksheet[0][column].value
+						are_these_arrays_equals = false
+					end
+				end
+		  	if are_these_arrays_equals
+					worksheet.drop(1).each { |row|
+						Account.find_or_create_by(name: row[0].value)
+					}
+		  	else
+		  		raise 'Wrong file! Accounts'
+		  	end
+		  	
+		  	worksheet = workbook['Categories']
+		  	headers = ['Name']
+		  	are_these_arrays_equals = true
+				headers.each_with_index do |header, column| 
+					if header != worksheet[0][column].value
+						are_these_arrays_equals = false
+					end
+				end
+		  	if are_these_arrays_equals
+					worksheet.drop(1).each { |row|
+						Category.find_or_create_by(name: row[0].value)
+					}
+		  	else
+		  		raise 'Wrong file! Categories'
+		  	end
+		  	
+		  	worksheet = workbook['Regex for Categories']
+		  	headers = ['Regex', 'Category', 'Origin', 'Card', 'Reference', 'Concept', 'Command']
+		  	are_these_arrays_equals = true
+				headers.each_with_index do |header, column| 
+					if header != worksheet[0][column].value
+						are_these_arrays_equals = false
+					end
+				end
+		  	if are_these_arrays_equals
+					worksheet.drop(1).each { |row|
+						CategoryRegex.find_or_create_by(regex: row[0].value) do |regex|
+							regex.category = row[1]
+							regex.origin = row[2]
+							regex.card = row[3]
+							regex.reference = row[4]
+							regex.concept = row[5]
+							regex.command = row[6]
+						end
+					}		  		
+		  	else
+		  		raise 'Wrong file! Regex for Categories'
+		  	end
+		  	
+		  	worksheet = workbook['Origins']
+		  	headers = ['Name']
+		  	are_these_arrays_equals = true
+				headers.each_with_index do |header, column| 
+					if header != worksheet[0][column].value
+						are_these_arrays_equals = false
+					end
+				end
+		  	if are_these_arrays_equals
+					worksheet.drop(1).each { |row|
+						Origin.find_or_create_by(name: row[0].value)
+					}
+		  	else
+		  		raise 'Wrong file! Origins'
+		  	end
+		  	
+		  	worksheet = workbook['Activities']
+		  	['Operation date', 'Value date', 'Name', 'Amount', 'Balance', 'Account', 'Category', 'Origin', 'Card', 'Concept', 'Commission', 'Reference', 'Command']
+		  	are_these_arrays_equals = true
+				headers.each_with_index do |header, column| 
+					if header != worksheet[0][column]
+						are_these_arrays_equals = false
+					end
+				end
+		  	if are_these_arrays_equals
+					worksheet.drop(1).each { |row|
+						account = Account.find_or_create_by(name: row[5].value)
+					 	Activity.new_activity_from_file(account, row[0], row[1], row[2], row[3], row[4])
+					}
+ 	
+		  	end
 
-			  worksheet = workbook[0]		  	
+				{:error => false} 
+
 		  rescue Exception => e
 		  	
 		    Rails.logger.error "file_manager::template.import => exception #{e.class.name} : #{e.message}"

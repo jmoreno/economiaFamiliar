@@ -273,7 +273,9 @@ en:
     backup:
       successfull_backup: Backup created!
     restore:
-      successfull_restoring: Backup restored!
+      successfull_import: Backup restored!
+      unsuccessfull_import: Wrong file. Data don´t imported.
+      file_not_present: You haven´t chosen any file.
   reports:
     index:
       title: Reports

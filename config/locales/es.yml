@@ -276,7 +276,9 @@ es:
     backup:
       successfull_backup: La copia de seguridad ha sido creada!
     restore:
-      successfull_restoring: La copia de seguridad ha sido restaurada!
+      successfull_import: La copia de seguridad ha sido restaurada!
+      unsuccessfull_import: El fichero no es correcto. No se han cargado datos.
+      file_not_present: No ha seleccionado ningún fichero.
   reports:
     index:
       title: Informes
