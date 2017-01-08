@@ -54,7 +54,9 @@ module FileManager
 						 worksheet[0][5] == 'Account' )
 				  	
 					worksheet.drop(1).each { |row|
-						account = Account.find_or_create_by(name: row[5])
+						account = Account.find_or_create_by(reference: row[5]) do |new_account|
+							new_account.name = row[5]
+						end
 					 	Activity.new_activity_from_file(account, row[0], row[1], row[2], row[3], row[4])
 					}
 					
@@ -92,7 +94,9 @@ module FileManager
 		  			 worksheet.cell(11,10) == 'Saldo' )
 		  	
 			  	if ( worksheet.cell(4,2) == 'Número de Cuenta: ')
-			  		account = Account.find_or_create_by(name: worksheet.cell(4,4))
+						account = Account.find_or_create_by(reference: worksheet.cell(4,4)) do |new_account|
+							new_account.name = worksheet.cell(4,4)
+						end
 			  	end
 			  		
 			  	worksheet.drop(11).each { |row|
@@ -127,7 +131,9 @@ module FileManager
 		  			 worksheet.cell(3,4) == 'Concepto' &&	
 		  			 worksheet.cell(3,5) == 'Situación' )
 		  	
-			  	account = Account.find_or_create_by(name: "Tarjeta de crédito")
+					account = Account.find_or_create_by(reference: "Credit Card") do |new_account|
+						new_account.name = "Credit Card"
+					end
 			  		
 			  	worksheet.drop(3).each { |row|
 			  		if row[0] == 'Importe total:'
@@ -169,7 +175,9 @@ module FileManager
 					
 					if (index == 0 && cells[0] =~ /N*mero de cuenta: (.*)/)
 						items = /N*mero de cuenta: (.*)/.match(cells[0])
-			  		account = Account.find_or_create_by(name: items[1])
+						account = Account.find_or_create_by(reference: items[1]) do |new_account|
+							new_account.name = items[1]
+						end
 			  		logger.info items[1]
 			  		logger.info account
 					else 
@@ -205,7 +213,7 @@ module FileManager
 	   	
 			worksheet = workbook[0]
 			worksheet.sheet_name = "Accounts"
-			['Name'].each_with_index { |header, index|
+			['Reference', 'Name', 'Initial Balance'].each_with_index { |header, index|
 				worksheet.add_cell(0, index, header) 
 				worksheet.sheet_data[0][index].change_font_bold(true) 
 				worksheet.sheet_data[0][index].change_fill('007fff')
@@ -214,7 +222,7 @@ module FileManager
 			accounts = Account.all.order(:name)
 			accounts.each_with_index { |account, index|
 				row = index + 1
-				[account.name].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+				[account.reference, account.name, account.initial_balance].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
 			}
 
 			worksheet = workbook.add_worksheet('Categories')
@@ -283,7 +291,7 @@ module FileManager
 		  	workbook = RubyXL::Parser.parse(file.path)
 		  	
 		  	worksheet = workbook['Accounts']
-		  	headers = ['Name'] 	 	
+		  	headers = ['Reference', 'Name', 'Initial Balance'] 	 	
 		  	are_these_arrays_equals = true
 				headers.each_with_index do |header, column| 
 					if header != worksheet[0][column].value
@@ -292,7 +300,10 @@ module FileManager
 				end
 		  	if are_these_arrays_equals
 					worksheet.drop(1).each { |row|
-						Account.find_or_create_by(name: row[0].value)
+						Account.find_or_create_by(reference: row[0].value) do |new_account|
+							new_account.name = row[1].value
+							new_account.initial_balance = row[2].value
+						end
 					}
 		  	else
 		  		raise 'Wrong file! Accounts'
@@ -363,7 +374,9 @@ module FileManager
 				end
 		  	if are_these_arrays_equals
 					worksheet.drop(1).each { |row|
-						account = Account.find_or_create_by(name: row[5].value)
+						account = Account.find_or_create_by(reference: row[5].value) do |new_account|
+							new_account.name = row[5].value
+						end
 					 	Activity.new_activity_from_file(account, row[0], row[1], row[2], row[3], row[4])
 					}
  	
