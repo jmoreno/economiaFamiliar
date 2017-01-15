@@ -302,7 +302,7 @@ module FileManager
 					worksheet.drop(1).each { |row|
 						Account.find_or_create_by(reference: row[0].value) do |new_account|
 							new_account.name = row[1].value
-							new_account.initial_balance = row[2].value
+							new_account.first_balance = row[2].value
 						end
 					}
 		  	else
