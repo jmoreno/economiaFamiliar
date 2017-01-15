@@ -59,7 +59,11 @@ gem 'devise'
 # Authorization with CanCanCan (Cause we can dance can can!!!)
 gem 'cancancan', '~> 1.10'
 # Bootstrap... why not?
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap', '4.0.0.alpha5'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
 # Font Awesome
 gem "font-awesome-rails"
 # Working with spreedsheets: xls, xlsx...

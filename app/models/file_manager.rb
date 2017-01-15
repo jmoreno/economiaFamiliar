@@ -213,7 +213,7 @@ module FileManager
 	   	
 			worksheet = workbook[0]
 			worksheet.sheet_name = "Accounts"
-			['Reference', 'Name', 'Initial Balance'].each_with_index { |header, index|
+			['Reference', 'Name', 'First Balance'].each_with_index { |header, index|
 				worksheet.add_cell(0, index, header) 
 				worksheet.sheet_data[0][index].change_font_bold(true) 
 				worksheet.sheet_data[0][index].change_fill('007fff')
@@ -222,7 +222,7 @@ module FileManager
 			accounts = Account.all.order(:name)
 			accounts.each_with_index { |account, index|
 				row = index + 1
-				[account.reference, account.name, account.initial_balance].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
+				[account.reference, account.name, account.first_balance].each_with_index { |field, column| worksheet.add_cell(row, column, field) }
 			}
 
 			worksheet = workbook.add_worksheet('Categories')
@@ -291,7 +291,7 @@ module FileManager
 		  	workbook = RubyXL::Parser.parse(file.path)
 		  	
 		  	worksheet = workbook['Accounts']
-		  	headers = ['Reference', 'Name', 'Initial Balance'] 	 	
+		  	headers = ['Reference', 'Name', 'First Balance'] 	 	
 		  	are_these_arrays_equals = true
 				headers.each_with_index do |header, column| 
 					if header != worksheet[0][column].value
