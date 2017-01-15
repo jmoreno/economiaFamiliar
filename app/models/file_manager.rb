@@ -365,7 +365,7 @@ module FileManager
 		  	end
 		  	
 		  	worksheet = workbook['Activities']
-		  	['Operation date', 'Value date', 'Name', 'Amount', 'Balance', 'Account', 'Category', 'Origin', 'Card', 'Concept', 'Commission', 'Reference', 'Command']
+		  	headers = ['Operation date', 'Value date', 'Name', 'Amount', 'Balance', 'Account', 'Category', 'Origin', 'Card', 'Concept', 'Commission', 'Reference', 'Command']
 		  	are_these_arrays_equals = true
 				headers.each_with_index do |header, column| 
 					if header != worksheet[0][column]
