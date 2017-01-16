@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170115191149) do
+ActiveRecord::Schema.define(version: 20170116002923) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 20170115191149) do
 
   create_table "patterns_origins", id: false, force: :cascade do |t|
     t.integer "pattern_id"
-    t.integer "ogiring_id"
-    t.index ["ogiring_id"], name: "index_patterns_origins_on_ogiring_id"
+    t.integer "origin_id"
+    t.index ["origin_id"], name: "index_patterns_origins_on_origin_id"
     t.index ["pattern_id"], name: "index_patterns_origins_on_pattern_id"
   end
 
