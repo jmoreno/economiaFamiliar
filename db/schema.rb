@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116002923) do
+ActiveRecord::Schema.define(version: 20170116004705) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -68,6 +68,13 @@ ActiveRecord::Schema.define(version: 20170116002923) do
     t.index ["name"], name: "index_origins_on_name"
   end
 
+  create_table "origins_patterns", id: false, force: :cascade do |t|
+    t.integer "origin_id"
+    t.integer "pattern_id"
+    t.index ["origin_id"], name: "index_origins_patterns_on_origin_id"
+    t.index ["pattern_id"], name: "index_origins_patterns_on_pattern_id"
+  end
+
   create_table "patterns", force: :cascade do |t|
     t.integer  "category_id"
     t.string   "name"
@@ -78,13 +85,6 @@ ActiveRecord::Schema.define(version: 20170116002923) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["category_id"], name: "index_patterns_on_category_id"
-  end
-
-  create_table "patterns_origins", id: false, force: :cascade do |t|
-    t.integer "pattern_id"
-    t.integer "origin_id"
-    t.index ["origin_id"], name: "index_patterns_origins_on_origin_id"
-    t.index ["pattern_id"], name: "index_patterns_origins_on_pattern_id"
   end
 
   create_table "users", force: :cascade do |t|
