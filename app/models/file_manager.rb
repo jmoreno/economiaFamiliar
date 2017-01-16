@@ -368,7 +368,7 @@ module FileManager
 		  	headers = ['Operation date', 'Value date', 'Name', 'Amount', 'Balance', 'Account', 'Category', 'Origin', 'Card', 'Concept', 'Commission', 'Reference', 'Command']
 		  	are_these_arrays_equals = true
 				headers.each_with_index do |header, column| 
-					if header != worksheet[0][column]
+					if header != worksheet[0][column].value
 						are_these_arrays_equals = false
 					end
 				end
@@ -377,12 +377,18 @@ module FileManager
 						account = Account.find_or_create_by(reference: row[5].value) do |new_account|
 							new_account.name = row[5].value
 						end
-					 	Activity.new_activity_from_file(account, row[0], row[1], row[2], row[3], row[4])
+					 	Activity.new_activity_from_file(account, row[0].value, row[1].value, row[2].value, row[3].value, row[4].value)
 					}
+					
+					{:error => false} 
+
+				else
  	
+		    	Rails.logger.error "Me cago en la puta"
+					{:error => true} 
+
 		  	end
 
-				{:error => false} 
 
 		  rescue Exception => e
 		  	
