@@ -54,10 +54,10 @@ module FileManager
 						 worksheet[0][5] == 'Account' )
 				  	
 					worksheet.drop(1).each { |row|
-						account = Account.find_or_create_by(reference: row[5]) do |new_account|
-							new_account.name = row[5]
+						account = Account.find_or_create_by(reference: row[5].value) do |new_account|
+							new_account.name = row[5].value
 						end
-					 	Activity.new_activity_from_file(account, row[0], row[1], row[2], row[3], row[4])
+					 	Activity.new_activity_from_file(account, row[0].value, row[1].value, row[2].value, row[3].value, row[4].value)
 					}
 					
 					{:error => false} 
