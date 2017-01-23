@@ -1,0 +1,21 @@
+<div class="container">
+	<%= render "tabs" %>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<% ["Fecha Operación", "Descripción", "Importe"].each do |column_header| %>
+				<th><%= column_header %></th>
+				<% end %>
+			</thead>
+			<tbody>
+				<% @activities.each do |activity| %>
+				<tr>
+					<td><%= activity['operationDate'] %></td>
+					<td><%= activity['name'] %></td>
+					<td><%= '%.2f€' % activity['amount'] %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

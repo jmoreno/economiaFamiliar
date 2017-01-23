@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 	  get 'reports/originsByCategory'
 	
 	  get 'welcome/index'
+	  get 'welcome/activities'
+	  get 'welcome/balances'
+	  get 'welcome/patterns'
 	
 	  root 'welcome#index'
 	

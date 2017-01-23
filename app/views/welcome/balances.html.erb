@@ -1,0 +1,20 @@
+<div class="container">
+	<%= render "tabs" %>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<% ["Cuenta", "Saldo"].each do |column_header| %>
+				<th><%= column_header %></th>
+				<% end %>
+			</thead>
+			<tbody>
+				<% @balances.each do |account| %>
+				<tr>
+					<td><%= account['account_name'] %></td>
+					<td><%= '%.2f€' % account['balance'] %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

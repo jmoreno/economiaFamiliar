@@ -1,0 +1,23 @@
+<div class="container">
+	<%= render "tabs" %>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<% ["Nombre", "Frecuencia", "Último movimiento", "Ultimo Importe", "Próximo movimiento"].each do |column_header| %>
+				<th><%= column_header %></th>
+				<% end %>
+			</thead>
+			<tbody>
+				<% @patterns.each do |pattern| %>
+				<tr>
+					<td><%= pattern['name'] %></td>
+					<td><%= pattern['frequency'] %></td>
+					<td><%= pattern['last_activity'] %></td>
+					<td><% if pattern['last_amount'] %><%= '%.2f€' % pattern['last_amount'] %><% end %></td>
+					<td><%= pattern['next_activity'] %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

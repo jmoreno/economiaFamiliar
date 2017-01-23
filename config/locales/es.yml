@@ -297,4 +297,11 @@ es:
     index:
       title: Bienvenido a Economía familiar
       paragraph: En esta web encontraras todos los movimientos realizados en tus cuentas, podrás consultar el gasto por determinados conceptos e incluso podrás saber que gastos faltan por llegar...
-      button_title: Adelante      
+      balances_button_title: Saldos      
+      activities_button_title: Movimientos
+      patterns_button_title: Cargos habituales      
+    tabs:
+      title: Bienvenido
+      balances_button_title: Saldos      
+      activities_button_title: Movimientos
+      patterns_button_title: Cargos habituales      

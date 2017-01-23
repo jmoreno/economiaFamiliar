@@ -1,7 +1,10 @@
 <div class="container">
-	<div class="jumbotron">
+	<%= render "tabs" %>
+  <div class="jumbotron">
 		<h1><%= t '.title' %></h1>
 		<p class="lead"><%= t '.paragraph' %></p>
-		<a class="btn btn-lg btn-primary" href="#" role="button"><%= t '.button_title' %></a>
+		<%= link_to(t('.balances_button_title'), welcome_balances_path, :class => "btn btn-lg btn-primary") %>
+		<%= link_to(t('.activities_button_title'), welcome_activities_path, :class => "btn btn-lg btn-primary") %>
+		<%= link_to(t('.patterns_button_title'), welcome_patterns_path, :class => "btn btn-lg btn-primary") %>
   </div>
 </div>
