@@ -1,14 +1,14 @@
   <ul class="nav nav-tabs">
   	<li class="nav-item">
-  	  <a class="nav-link <%= 'active' if current_page?(welcome_index_path) %>" href="index"><%= t '.title' %></a>
+  	  <a class="nav-link <%= 'active' if current_page?(welcome_index_path) %>" href=<%= url_for(welcome_index_path) %>><%= t '.title' %></a>
   	</li>
   	<li class="nav-item">
-  	  <a class="nav-link <%= 'active' if current_page?(welcome_balances_path) %>" href="balances"><%= t '.balances_button_title' %></a>
+  	  <a class="nav-link <%= 'active' if current_page?(welcome_balances_path) %>" href=<%= url_for(welcome_balances_path) %>><%= t '.balances_button_title' %></a>
   	</li>
   	<li class="nav-item">
-  	  <a class="nav-link <%= 'active' if current_page?(welcome_activities_path) %>" href="activities"><%= t '.activities_button_title' %></a>
+  	  <a class="nav-link <%= 'active' if current_page?(welcome_activities_path) %>" href=<%= url_for(welcome_activities_path) %>><%= t '.activities_button_title' %></a>
   	</li>
   	<li class="nav-item">
-  	  <a class="nav-link <%= 'active' if current_page?(welcome_patterns_path) %>" href="patterns"><%= t '.patterns_button_title' %></a>
+  	  <a class="nav-link <%= 'active' if current_page?(welcome_patterns_path) %>" href=<%= url_for(welcome_patterns_path) %>><%= t '.patterns_button_title' %></a>
   	</li>
 	</ul>
