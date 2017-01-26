@@ -1,6 +1,6 @@
 module FileManager
-
-	class File
+	
+	class FileImported
 		include ActiveModel::Validations
 		
 		attr_accessor :file, :file_type
@@ -178,8 +178,6 @@ module FileManager
 						account = Account.find_or_create_by(reference: items[1]) do |new_account|
 							new_account.name = items[1]
 						end
-			  		logger.info items[1]
-			  		logger.info account
 					else 
 						if (index == 0)
 							break
@@ -187,7 +185,7 @@ module FileManager
 					end
 					
 					if (index >= 5)
-				  	Activity.new_activity_from_file(account, row[0], row[1], row[2], row[3], row[4])
+				  	Activity.new_activity_from_file(account, cells[0], cells[1], cells[2], cells[3], cells[4])
 					end
 			
 				end

@@ -9,14 +9,11 @@ class WelcomeController < ApplicationController
   end
 
   def balances
-  	total_by_account = Activity.group("account_id").sum("amount")
-  	@balances = []
-  	total_by_account.each do |total|
-  		balance = Hash.new
-  		account = Account.find(total[0])
+  	@balances = Activity.group("account_id").select("account_id, ' ' as account_name, SUM(amount) as total_amount, 0 as balance, MAX(operationDate) as max_operation_date")
+  	@balances.each do |balance|
+  		account = Account.find(balance['account_id'])
   		balance["account_name"] = account.name 
-  		balance["balance"] = (total[1] + account.first_balance).round(2)
-  		@balances << balance
+  		balance["balance"] = (balance['total_amount'] + account.first_balance).round(2)
   	end
   end
 

@@ -10,7 +10,7 @@ class ManagementController < ApplicationController
 
   def import
 
-  	@file = FileManager::File.new({file: params[:file], file_type: params[:file_type]})
+  	@file = FileManager::FileImported.new({file: params[:file], file_type: params[:file_type]})
 
   	if @file.valid?
  
@@ -50,7 +50,7 @@ class ManagementController < ApplicationController
 
   def restore
 
-  	@file = FileManager::File.new({file: params[:file], file_type: params[:file_type]})
+  	@file = FileManager::FileImported.new({file: params[:file], file_type: params[:file_type]})
 
   	if @file.valid?
 	  	import_status = FileManager::Backup.restore(params[:file])

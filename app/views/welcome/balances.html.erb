@@ -3,7 +3,7 @@
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
-				<% ["Cuenta", "Saldo"].each do |column_header| %>
+				<% ["Cuenta", "Fecha última operación", "Saldo"].each do |column_header| %>
 				<th><%= column_header %></th>
 				<% end %>
 			</thead>
@@ -11,7 +11,8 @@
 				<% @balances.each do |account| %>
 				<tr>
 					<td><%= account['account_name'] %></td>
-					<td><%= '%.2f€' % account['balance'] %></td>
+					<td><%= account['max_operation_date'] %></td>
+					<td><% if account['balance'] %><%= '%.2f€' % account['balance'] %><% end %></td>
 				</tr>
 				<% end %>
 			</tbody>
